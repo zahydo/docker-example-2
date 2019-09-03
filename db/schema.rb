@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 20160601011236) do
   create_table "figurechords", force: :cascade do |t|
     t.string   "nombre_figura"
     t.integer  "chord_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.string   "imagenFigura_file_name"
     t.string   "imagenFigura_content_type"
-    t.integer  "imagenFigura_file_size"
+    t.integer  "imagenFigura_file_size",    limit: 8
     t.datetime "imagenFigura_updated_at"
   end
 
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20160601011236) do
 
   create_table "songs", force: :cascade do |t|
     t.string   "titulo",           null: false
-    t.string   "autor"
+    t.string   "autor",            null: false
     t.string   "album"
     t.integer  "anio_creacion"
     t.text     "letra"
@@ -118,26 +118,26 @@ ActiveRecord::Schema.define(version: 20160601011236) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                                 null: false
-    t.string   "encrypted_password",                    null: false
+    t.string   "email",                                           null: false
+    t.string   "encrypted_password",                              null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",             default: 0, null: false
+    t.integer  "sign_in_count",                       default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "nombres",                               null: false
-    t.string   "apellidos",                             null: false
-    t.string   "apodo",                                 null: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.string   "nombres",                                         null: false
+    t.string   "apellidos",                                       null: false
+    t.string   "apodo",                                           null: false
+    t.boolean  "esAdministrador"
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "imagenPerfil_file_name"
     t.string   "imagenPerfil_content_type"
-    t.integer  "imagenPerfil_file_size"
+    t.integer  "imagenPerfil_file_size",    limit: 8
     t.datetime "imagenPerfil_updated_at"
-    t.integer  "role",                      default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

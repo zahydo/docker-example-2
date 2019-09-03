@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-=begin
+
 Tuning.create(nombre_afinacion:"Tono estandar",		descripcion:"Mi  La  Re  Sol  Si  Mi")
 Tuning.create(nombre_afinacion:"Medio tono abajo",	descripcion:"Re#  Sol#  Do#  Fa#  La#  Re#")
 Tuning.create(nombre_afinacion:"Tono abajo",		descripcion:"Re  Sol  Do  Fa  La  Re")
@@ -62,7 +62,7 @@ Song.create(titulo: "all my love", autor: "Led zeppelin", album: "fly of heaven"
 Song.create(titulo: "<script> alert(dfsdf); </script>", autor: "Led zeppelin", album: "fly of heaven",anio_creacion: 1965, letra: "esta es la letra dela cancion",genre_id: 1,tuning_id: 2,url_video:"rY0WxgSXdEE",user_id: 5 )
 
 
-=end
+
 Song.create(titulo: "besos usados", autor: "Andres Cepeda", album: "Dia Tras Dia",anio_creacion: 2010, letra: "esta es la letra dela cancion",genre_id: 1,tuning_id: 1,url_video:"cZmw2lQb2oQ",user_id: 2 )
 Song.create(titulo: "bajo el agua", autor: "Manuel Medrano", album: "Bajo el agua",anio_creacion: 2015, letra: "esta es la letra dela cancion",genre_id: 1,tuning_id: 2,url_video:"zLX_GcXt2pI",user_id: 2 )
 Song.create(titulo: "al taller del maestro", autor: "Alex Campos", album: "al taller del maestro",anio_creacion: 2007, letra: "esta es la letra dela cancion",genre_id: 1,tuning_id: 1,url_video:"VlwPoKbH5tw",user_id: 2 )
