@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160601011236) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "average_caches", force: :cascade do |t|
     t.integer  "rater_id"
     t.integer  "rateable_id"
@@ -40,8 +37,8 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "comments", ["song_id"], name: "index_comments_on_song_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+  add_index "comments", ["song_id"], name: "index_comments_on_song_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "figurechords", force: :cascade do |t|
     t.string   "nombre_figura"
@@ -54,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.datetime "imagenFigura_updated_at"
   end
 
-  add_index "figurechords", ["chord_id"], name: "index_figurechords_on_chord_id", using: :btree
+  add_index "figurechords", ["chord_id"], name: "index_figurechords_on_chord_id"
 
   create_table "genres", force: :cascade do |t|
     t.string   "nombre"
@@ -80,8 +77,8 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.datetime "updated_at"
   end
 
-  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
-  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type"
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id"
 
   create_table "rating_caches", force: :cascade do |t|
     t.integer  "cacheable_id"
@@ -93,7 +90,7 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.datetime "updated_at"
   end
 
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "songs", force: :cascade do |t|
     t.string   "titulo",           null: false
@@ -110,8 +107,8 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.integer  "contador_visitas"
   end
 
-  add_index "songs", ["genre_id"], name: "index_songs_on_genre_id", using: :btree
-  add_index "songs", ["tuning_id"], name: "index_songs_on_tuning_id", using: :btree
+  add_index "songs", ["genre_id"], name: "index_songs_on_genre_id"
+  add_index "songs", ["tuning_id"], name: "index_songs_on_tuning_id"
 
   create_table "tunings", force: :cascade do |t|
     t.string   "nombre_afinacion"
@@ -129,8 +126,8 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.integer  "sign_in_count",             default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.string   "nombres",                               null: false
     t.string   "apellidos",                             null: false
     t.string   "apodo",                                 null: false
@@ -143,13 +140,7 @@ ActiveRecord::Schema.define(version: 20160601011236) do
     t.integer  "role",                      default: 0
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  add_foreign_key "comments", "songs"
-  add_foreign_key "comments", "users"
-  add_foreign_key "figurechords", "chords"
-  add_foreign_key "songs", "genres"
-  add_foreign_key "songs", "tunings"
-  add_foreign_key "songs", "users"
 end
