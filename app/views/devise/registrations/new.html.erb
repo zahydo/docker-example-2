@@ -1,0 +1,102 @@
+<br>
+
+  <h1 class="text-center">Reg&iacutestrate</h1>
+ <p class="text-center">Completa todos los campos obligatorios (*)</p>
+<br>
+<div class="form-horizontal">
+
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+
+    <div class="form-group">
+      <%= f.label :email, "Correo electrónico* ", class:"control-label col-sm-3"%>
+      <!-- <label class="control-label col-sm-3" for="txtCorreo">*Correo electr&oacutenico</label>
+    -->
+      <div class="col-sm-6">
+      <%= f.email_field :email, autofocus: false, placeholder:"Ej: pepitopeerez@ejemplo.com", class:"form-control",:onblur =>"validarEmailCorrecto(this);",:onkeyup =>"validarEmailCorrecto(this);" %>
+        <!-- <input type="email" class="form-control" id="txtCorreo" name="txtCorreo" placeholder="Ej: pepitopeerez@ejemplo.com"> 
+      -->
+      <span class="help-inline" id="error_email" style="color:#FF0000"><%= @user.errors[:email].any? ? @user.errors[:email].to_s[/\w([^"]*)/] : "" %></span>
+            </div>
+    </div>
+    <div class="form-group">
+      <!-- <label class="control-label col-sm-3" for="txtNombres">*Nombres:</label>
+    -->
+      <%= f.label :nombres, "Nombres* ", placeholder:"", class:"control-label col-sm-3"%>
+      <div class="col-sm-6">
+        <%= f.text_field :nombres, autocomplete: "on", placeholder:"Ej: Pepe", class:"form-control", :onblur => "validarNombreCorrecto(this);", :onkeyup => "validarNombreCorrecto(this);"%>
+        <!-- <input type="text" class="form-control" id="txtNombres" name="txtNombres" placeholder="Ej: Pepe">
+      -->
+        <span class="help-inline" id="error_nombre" style="color:#FF0000"><%= @user.errors[:nombres].any? ? @user.errors[:nombres].to_s[/\w([^"]*)/] : "" %></span>
+        
+      
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :apellidos, "Apellidos* ", class:"control-label col-sm-3"%>
+      <!-- <label class="control-label col-sm-3" for="txtApellidos">*Apellidos:</label>
+    -->
+      <div class="col-sm-6">
+        <%= f.text_field :apellidos, autocomplete: "on", placeholder:"Ej: perez", class:"form-control",:onblur => "validarApellidoCorrecto(this);",:onkeyup => "validarApellidoCorrecto(this);"%>
+        <!-- <input type="text" class="form-control" id="txtApellidos" name="txtApellidos" placeholder="Ej: perez">
+      -->
+      <span class="help-inline" id="error_apellido" style="color:#FF0000"><%= @user.errors[:apellidos].any? ? @user.errors[:apellidos].to_s[/\w([^"]*)/] : "" %></span>
+      
+      </div>
+    </div>
+    <div class="form-group">
+      <!-- <label class="control-label col-sm-3" for="txtApodo">*Apodo:</label>
+    --><%= f.label :apodo, "Nombre de usuario* ", class:"control-label col-sm-3"%>
+      <div class="col-sm-6">
+        <%= f.text_field :apodo, autocomplete: "on", placeholder:"Ej: pepitope", class:"form-control",:onblur => "validarApodoCorrecto(this);",:onkeyup => "validarApodoCorrecto(this);"%>
+        <!-- <input type="text" class="form-control" id="txtApodo" name="txtApodo" placeholder="Ej: pepitope">
+      -->
+      <span class="help-inline" id="error_apodo" style="color:#FF0000"><%= @user.errors[:apodo].any? ? @user.errors[:apodo].to_s[/\w([^"]*)/] : "" %></span>
+      
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, "Contraseña* ",class:"control-label col-sm-3"%>
+      <!-- <label class="control-label col-sm-3" for="txtPass">*Contraseña:</label>
+    -->
+      <div class="col-sm-6">
+        <%= f.password_field :password, autocomplete: "off",class:"form-control",:onblur => "validarContrasenaCorrecto(this);",:onkeyup => "validarContrasenaCorrecto(this);"%>
+        <!-- <input type="password" class="form-control" id="txtPass" name="txtPass" placeholder="Escribe la contraseña">
+      -->
+      <span class="help-inline" id="error_contrasena" style="color:#FF0000"><%= @user.errors[:password].any? ? @user.errors[:password].to_s[/\w([^"]*)/] : "" %></span>
+      
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "Confirmar contraseña* ",class:"control-label col-sm-3"%>
+      <!-- <label class="control-label col-sm-3" for="txtRepPass">*Repetir contraseña:</label>
+    -->
+      <div class="col-sm-6">
+        <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", :onblur => "validarCContrasenaCorrecto(this);", :onkeyup => "validarCContrasenaCorrecto(this);"%>
+       <!-- <input type="password" class="form-control" id="txtRepPass" name="txtRepPass"placeholder="Repite la contraseña">
+     -->
+     <span class="help-inline" id="error_Ccontrasena" style="color:#FF0000"><%= @user.errors[:password_confirmation].any? ? @user.errors[:password_confirmation].to_s[/\w([^"]*)/] : "" %></span>
+     
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :imagenPerfil, "Imagen de perfil ",class:"control-label col-sm-3"%>
+      <div class="col-sm-8">
+        <%= f.file_field :imagenPerfil %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit "Aceptar", class:"btn btn-default" %>
+    </div>
+    <!--<div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox">
+          <label><input type="checkbox"> Remember me</label>
+        </div>
+      </div>
+    </div>-->
+<%end%>
+</div>

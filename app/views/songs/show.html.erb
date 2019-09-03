@@ -1,0 +1,167 @@
+<div class="row content">
+	<div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+    	<p id="notice" style="color: #00FF00;"><%= notice %></p>
+		<h1 class="text-center"><%= Sanitize.fragment(@song.titulo.capitalize, Sanitize::Config::RELAXED).html_safe%></h1>
+
+    	<div class="row content">
+    		  <div class="col-sm-6 text-left"> 
+    		  <br>
+    		  <div class="table-responsive">
+				<table class="table table-striped">
+				<tr>
+			      <td><strong>Autor:</strong></td><td> <%= Sanitize.fragment(@song.autor.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+			    </tr>
+			    <tr>
+			      <% Genre.joins(:songs).where("genres.id=#{@song.genre_id} AND songs.id=#{@song.id}").each do |genre|%>
+			    
+			      <td><strong>Genero:</strong> </td><td><%= Sanitize.fragment(genre.nombre.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+			      <%end%>
+			    </tr>
+			    <tr>
+			      <td><strong>Album:</strong></td><td> <%=  Sanitize.fragment(@song.album.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+			    </tr>
+			    <tr>
+			      <td><strong>Año:</strong></td><td> <%=  Sanitize.fragment(@song.anio_creacion, Sanitize::Config::RELAXED).html_safe %></td>
+			    </tr>
+			    <tr>
+			      <td><strong>Calificación: </strong></td><td> <div id="vot"><%= rating_for @song, "visual_effects", star: 10, disable_after_rate: true, enable_half: true, cancel_hint: "Cancela esta votación!" %></div> </td>
+			     </tr>
+			     <tr>
+			     	<% User.joins(:songs).where("users.id=songs.user_id and songs.id=#{@song.id}").each do |user|%>
+			     	<td><strong>Nombre de usuario:</strong></td>
+			     	<td><%= Sanitize.fragment(user.apodo.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+			     	<%end%>
+
+			     </tr>
+			     <tr>
+			     	<td><strong>N&uacutemero de visitas:</strong></td>
+			     	<td> <%=  Sanitize.fragment(@song.contador_visitas, Sanitize::Config::RELAXED).html_safe %></td>
+			     </tr>	
+			    </table>
+			  </div>
+
+		      </div>
+		      <div class="col-sm-6 text-left"> 
+			     <br>
+				 <div class="embed-responsive embed-responsive-4by3"> 
+				<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @song.url_video%>" frameborder="0" allowfullscreen></iframe>
+				</div>
+		      </div>
+        </div>
+        <br>
+        <br>
+        <div class="row content">
+        	  <div class="panel panel-primary">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Acordes</div>
+				  <div class="panel-body">
+				    <div class="container-fluid text-center bg-grey">
+					  
+					  <div class="row text-center">
+					  	<h2>Afinaci&oacuten:</h2>
+
+					  	<% Tuning.joins(:songs).where("tunings.id=#{@song.tuning_id} AND songs.id=#{@song.id}").each do |t|%>
+
+			      		<p> <%= t.nombre_afinacion%> : <strong><%= t.descripcion%></strong></p>
+			      		<%end%>
+
+					    <!--<div class="col-sm-3">
+					      <div class="thumbnail">
+					        <img src="bandmember.jpg" alt="Do">
+					        <p><strong>Do</strong></p>
+					        <p>(C)</p>
+					      </div>
+					    </div>
+					    <div class="col-sm-3">
+					      <div class="thumbnail">
+					        <img src="bandmember.jpg" alt="Re">
+					        <p><strong>Re</strong></p>
+					        <p>(D)</p>
+					      </div>
+					    </div>
+					    <div class="col-sm-3">
+					      <div class="thumbnail">
+					        <img src="bandmember.jpg" alt="Do">
+					        <p><strong>Do</strong></p>
+					        <p>(C)</p>
+					      </div>
+					    </div>
+					    <div class="col-sm-3">
+					      <div class="thumbnail">
+					        <img src="bandmember.jpg" alt="Re">
+					        <p><strong>Re</strong></p>
+					        <p>(D)</p>
+					      </div>
+					    </div>-->
+					</div>
+				 </div>
+        	</div>
+        	</div>
+        </div>
+        <div class="row content">
+        	  <div class="panel panel-primary">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Letra</div>
+				  <div class="panel-body">
+				  	<%= simple_format partir(@song.letra) %>
+				  	<!--
+				  	<%= simple_format(Sanitize.fragment(@song.letra, Sanitize::Config::RELAXED).html_safe) %>
+				  -->
+				 </div>
+        	 </div>
+        </div>
+        
+	    <div>
+        <br>
+
+        <% if user_signed_in? %>
+        <%= render "comments/form" %>
+        <%else%>
+        <strong> <%= link_to "Inicia sesión", new_user_session_path %> o <%= link_to "Regístrate", new_user_registration_path %> para poder comentar</strong>     
+        <% end %>
+
+		    <h2><strong>Comentarios</strong></h2>
+		    <br>		    
+		    <div id="comments-box">
+			<% @song.comments.each  do |comment| %>			  	  	
+			  	<p>
+			  	<strong > Opinion por: <%= Sanitize.fragment(comment.user.email, Sanitize::Config::RELAXED).html_safe %></strong>			  		  	
+			  	<%= comment.publication_date %>
+			    <br>
+			    <%= Sanitize.fragment(comment.text, Sanitize::Config::RELAXED).html_safe %>
+			    </p>			   	
+			  <br>  			  
+		<% end %>
+			</div>		
+		</div>
+    </div>    
+    <div class="col-sm-2 sidenav">
+            
+    </div>
+</div>
+
+<% if user_signed_in? %>
+	<% if current_user.role == "normal_user" and current_user.id == @song.user_id %>
+		<%= link_to 'Editar', edit_song_path(@song) %> |
+		<%= link_to 'Regresar', songs_path %>
+	<%end%>
+<%end%>
+
+<script>
+	$(document).on("ready page:load",function()
+	{
+		$(document).ready(function()
+		{
+			$("pre").hover(function()
+			{
+				$(this).css("background-color", "yellow");
+			}, function()
+			{
+				$(this).css("background-color", "pink");
+			});
+	});
+	});
+</script>

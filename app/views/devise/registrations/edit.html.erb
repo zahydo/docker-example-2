@@ -1,0 +1,82 @@
+<br>
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+        <h2 class="text-center">Editar cuenta</h2>
+        <div class="col-sm-6 text-left"> 
+          
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="form-group">
+                <%= f.label :email, "Correo electrónico" %><br />
+                <%= f.email_field :email, autofocus: false, class:"form-control" ,:onblur =>"validarEmailCorrecto(this);",:onkeyup =>"validarEmailCorrecto(this);"%>
+                <span class="help-inline" id="error_email" style="color:#FF0000"><%= @user.errors[:email].any? ? @user.errors[:email].to_s[/\w([^"]*)/] : "" %></span>
+              </div>
+              <div class="form-group">
+                <%= f.label :nombres, "Nombres" %><br />
+                <%= f.text_field :nombres, autofocus: false, class:"form-control" , :onblur => "validarNombreCorrecto(this);", :onkeyup => "validarNombreCorrecto(this);"%>
+                <span class="help-inline" id="error_nombre" style="color:#FF0000"><%= @user.errors[:nombres].any? ? @user.errors[:nombres].to_s[/\w([^"]*)/] : "" %></span>
+              </div>
+              <div class="form-group">
+                <%= f.label :apellidos, "Apellidos" %><br />
+                <%= f.text_field :apellidos, autofocus: false, class:"form-control" ,:onblur => "validarApellidoCorrecto(this);",:onkeyup => "validarApellidoCorrecto(this);"%>
+                <span class="help-inline" id="error_apellido" style="color:#FF0000"><%= @user.errors[:apellidos].any? ? @user.errors[:apellidos].to_s[/\w([^"]*)/] : "" %></span>
+              </div>
+              <div class="form-group">
+                <%= f.label :apodo, "Nombre de usuario" %><br />
+                <%= f.text_field :apodo, autofocus: false, class:"form-control",:onblur => "validarApodoCorrecto(this);",:onkeyup => "validarApodoCorrecto(this);"%>
+                 <span class="help-inline" id="error_apodo" style="color:#FF0000"><%= @user.errors[:apodo].any? ? @user.errors[:apodo].to_s[/\w([^"]*)/] : "" %></span>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div>Actualmente se espera la confirmaci&oacuten de: <%= resource.unconfirmed_email %></div>
+              <% end %>
+
+              <div class="form-group">
+                <%= f.label :password, "Contraseña"%> <i>(dejar en blanco si no se desea cambiar)</i><br />
+                <%= f.password_field :password, autocomplete: "off", class:"form-control", :value => @current_password  %>
+                <span class="help-inline" id="error_contrasena" style="color:#FF0000;font-weight: bold"></span>
+              </div>
+
+              <div class="form-group ">
+                <%= f.label :password_confirmation, "Confirmar contraseña" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "off", class:"form-control", :value => @current_password %>
+                <span class="help-inline" id="error_Ccontrasena" style="color:#FF0000;font-weight: bold"></span>
+              </div>
+
+              <div class="form-group ">
+                <%= f.label :current_password,"Contraseña actual" %> <i>(necesitamos tu contraseña actual para confirmar los cambios)</i><br />
+                <%= f.password_field :current_password, autocomplete: "off", class:"form-control",:onblur => "validarCurrentContrasenaCorrecto(this);",:onkeyup => "validarCurrentContrasenaCorrecto(this);" %>
+                <span class="help-inline" id="error_Cucontrasena" style="color:#FF0000"><%= @user.errors[:current_password].any? ? @user.errors[:current_password].to_s[/\w([^"]*)/] : "" %></span>                
+              </div>
+              <div class="form-actions">
+                <%= f.submit "Actualizar" %>
+              </div>
+              
+        </div>
+        <div class="col-sm-6 text-left"> 
+              <div class="form-group">
+                <%= f.label :imagenPerfil, "Editar imagen de perfil"%>
+                <div class="col-sm-8">
+                  <%= f.file_field :imagenPerfil %>
+                </div>
+              </div>
+              <%= image_tag(current_user.imagenPerfil, size:"400x450") %>
+              
+        </div>
+        
+        <% end %>
+        <h3>Cancelar mi cuenta</h3>
+
+        <p>No estas contento ? <%= button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "¿Estas seguro?" }, method: :delete %></p>
+    </div>
+    
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+</div>
+
+<%= link_to "Regresar", :back %>

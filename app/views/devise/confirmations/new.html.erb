@@ -1,0 +1,22 @@
+<br>
+<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+<h2 class="text-center">Renviarme instrucciones de confirmacion</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="form-group">
+    <%= f.label :email , "Correo electrónico* ", class:"control-label col-sm-3"%>
+      <div class="col-sm-8">
+    <%= f.email_field :email, placeholder:"Digita tu correo electrónico", class:"form-control", autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) , :onblur =>"validarEmailCorrecto(this);", :onkeyup =>"validarEmailCorrecto(this);" %> 
+    <span class="help-inline" id="error_email" style="color:#FF0000;font-weight: bold"></span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Renviarme instrucciones de confirmacion" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

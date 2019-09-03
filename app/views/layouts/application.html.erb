@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  	<title>AlCompas</title>
+  	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+  	<%= csrf_meta_tags %>
+  	<script>
+		$(document).on("ready page:load",function()
+		{	
+			$("#letrayacordes").hide();
+			$("#videoyaudio").hide();
+			$("#abrirletrayacordes").click(function(){
+				$("#letrayacordes").slideDown(500);
+				$("#abrirletrayacordes").hide();
+			});
+			$("#abrirvideoyaudio").click(function(){
+				$("#videoyaudio").slideDown(500);
+				$("#abrirvideoyaudio").hide();
+			});
+			$("#piechart_3d").hide();
+			$("#mostrarestadistica").click(function(){
+				$("#piechart_3d").show(function(){drawChart();});
+				$("#mostrarestadistica").hide();
+			});
+		});
+  	</script>
+	</head>
+	<body class="scroll">
+		
+		<%= render 'shared/navbar'%>
+		
+		<!--<div class="container-fluid">
+  		<div class="row content">
+			<div class="col-sm-12" id="contenido">
+			
+				<div class="well">
+					
+				</div>
+				<div class="well">-->
+					<%= yield %>
+				<!--</div>
+			</div>
+		
+		</div>-->
+		</div>
+		
+	</body>
+<%= render 'shared/footer'%>
+
+</html>

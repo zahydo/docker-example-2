@@ -1,0 +1,98 @@
+<div class="row content">
+  <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+    		
+			<h1 class="text-center">Resultados de la b&uacutesqueda</h1>
+			<% if params[:buscar_cancion].blank? %>
+				<% if @count == 0 %>
+					<h3>No se encontraron resultados</h3>
+				<%else%>
+					<p>Se encontraron <%= @count %> resultados </p>
+					<div class="table-responsive">
+					<table class="table table-striped ">
+					<thead>
+					    <tr>
+					      <th style="text-align: center">T&iacutetulo</th>
+					      <th >Autor</th>
+					      <th >G&eacutenero</th>
+					      <th >Calificaci&oacuten</th>
+					    </tr>
+					  </thead>
+					<tbody>
+						<% @songs.each do |s| %>
+					      <tr>
+
+					          <td><%= link_to  Sanitize.fragment(s.titulo.capitalize, Sanitize::Config::RELAXED).html_safe, s %></td>
+					          <td><%=  Sanitize.fragment(s.autor.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+					          <% Genre.joins(:songs).where("genres.id=#{s.genre_id} AND songs.id=#{s.id}").each do |genre|%>
+					          <td><%= Sanitize.fragment(genre.nombre.capitalize, Sanitize::Config::RELAXED).html_safe  %></td>
+					          <%end%>
+					          <div>
+					          	<td> <%= image_tag("mid-star.png", size:"50")%> 
+					          		<% rate = RatingCache.joins("INNER JOIN songs ON cacheable_id=#{s.id}").uniq.pluck(:avg,:qty) %>
+					          		<% if rate.empty? %>
+					          		0/10
+					          		<%else%>
+					          			<%= eval(sprintf("%8.1f",rate[0][0])) %>/10
+					          		<%end%>
+					          	</td>
+					          </div>
+					      </tr>
+					    <%end%>
+					 </tbody>
+					</table>
+					</div>
+
+					<div><%= will_paginate @songs, :previous_label => '<-Anterior', :next_label => 'Siguiente->', renderer: BootstrapPagination::Rails %></div>
+				<%end%>
+			<% else %>
+				<% if @count == 0 %>
+					<h3>No se encontraron resultados para "<strong><%= params[:buscar_cancion] %></strong>"</h3>
+				<%else%>
+					<p>Se encontraron <strong><%= @count %></strong> resultados para "<strong><%= params[:buscar_cancion] %></strong>"</p>				
+					
+					<div class="table-responsive">
+					<table class="table table-striped ">
+					<thead>
+					    <tr>
+					      <th style="text-align: center">T&iacutetulo</th>
+					      <th >Autor</th>
+					      <th >G&eacutenero</th>
+					      <th >Calificaci&oacuten</th>
+					    </tr>
+					  </thead>
+					<tbody>
+						<% @songs.each do |s| %>
+					      <tr>
+
+					          <td><%= link_to  Sanitize.fragment(s.titulo.capitalize, Sanitize::Config::RELAXED).html_safe, s %></td>
+					          <td><%=  Sanitize.fragment(s.autor.capitalize, Sanitize::Config::RELAXED).html_safe %></td>
+					          <% Genre.joins(:songs).where("genres.id=#{s.genre_id} AND songs.id=#{s.id}").each do |genre|%>
+					          <td><%= Sanitize.fragment(genre.nombre.capitalize, Sanitize::Config::RELAXED).html_safe  %></td>
+					          <%end%>
+					          <div>
+					          	<td> <%= image_tag("mid-star.png", size:"50")%> 
+					          		<% rate = RatingCache.joins("INNER JOIN songs ON cacheable_id=#{s.id}").uniq.pluck(:avg,:qty) %>
+					          		<% if rate.empty? %>
+					          		0/10
+					          		<%else%>
+					          			<%= eval(sprintf("%8.1f",rate[0][0])) %>/10
+					          		<%end%>
+					          	</td>
+					          </div>
+					      </tr>
+					    <%end%>
+					 </tbody>
+					</table>
+					</div>
+
+					<div><%= will_paginate @songs, :previous_label => '<-Anterior', :next_label => 'Siguiente->', renderer: BootstrapPagination::Rails %></div>
+				<%end%>
+			<%end%>
+		</div>
+		<div class="col-sm-2 sidenav">
+            
+    	</div>
+	</div>

@@ -1,0 +1,95 @@
+<script>
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() 
+  {
+    var data = google.visualization.arrayToDataTable
+    ([
+      ['Canciones', 'Más visitadas'],
+      ['<%= @diez_mas_populares[0].titulo.capitalize %> (<%= @diez_mas_populares[0].autor.capitalize %>)', parseInt('<%= @diez_mas_populares[0].contador_visitas %>')],
+      ['<%= @diez_mas_populares[1].titulo.capitalize %> (<%= @diez_mas_populares[1].autor.capitalize %>)', parseInt('<%= @diez_mas_populares[1].contador_visitas %>')],
+      ['<%= @diez_mas_populares[2].titulo.capitalize %> (<%= @diez_mas_populares[2].autor.capitalize %>)', parseInt('<%= @diez_mas_populares[2].contador_visitas %>')],
+      ['<%= @diez_mas_populares[3].titulo.capitalize %> (<%= @diez_mas_populares[3].autor.capitalize %>)', parseInt('<%= @diez_mas_populares[3].contador_visitas %>')],
+      ['<%= @diez_mas_populares[4].titulo.capitalize %> (<%= @diez_mas_populares[4].autor.capitalize %>)', parseInt('<%= @diez_mas_populares[4].contador_visitas %>')]
+    ]);
+
+    var options = 
+    {
+      //title: 'Canciones más populares',
+      is3D: true,
+      tooltip: {textStyle: {color: 'black'}, showColorCode: true},
+      legend: {position: 'top', textStyle: {color: 'black', fontSize: 13}, alignment:'center', maxLines:2},
+      chartArea: {right:150},
+      //backgroundColor: 'white'
+      backgroundColor: '#F4F5F5'
+    };
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
+</script>
+
+<div id="inicio" class="jumbotron text-center">
+
+  <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+  <h1 >AlCompas</h1>
+   
+  <p>La mejor alternativa para buscar y gestionar la letra y los acordes de tus canciones favoritas</p> 
+
+  <%= form_tag songs_resultados_path, method: :get, class:"form-inline" do %>
+
+    <%= text_field_tag :buscar_cancion,params[:buscar_cancion],class:'form-control',placeholder:"Buscar cancion...", autocomplete: "on", size:50 %>
+
+      <%= button_tag( class:"btn btn-default") do %>
+        <span class='glyphicon glyphicon-search'></span>
+      <% end %> 
+  <%end%>
+</div>
+
+<!-- Container (About Section) -->
+<div class="text-center" >
+  <div class="container-fluid">
+    
+      <h1>Canciones más populares</h1>
+      <p>Las 5 canciones más buscadas por nuestros usuarios.</p>
+      <div class="row">
+        <%i=1%>
+        <% @diez_mas_populares.each do |s|%>
+        <div class="col-xs-4 col-sm-4">
+          <div class="thumbnail">
+            <img src="/assets/bandmember.jpg" alt="imagen canción">
+            <div class="caption">
+              <p><strong><%=i%></strong>. <%= link_to  Sanitize.fragment(s.titulo.capitalize, Sanitize::Config::RELAXED).html_safe, s %></p>
+              <p>Autor: <%=s.autor%></p>
+              <p>Álbum: <%=s.album%></p>
+              <p>Visitas: <%=s.contador_visitas%></p>
+            </div>
+          </div>
+        </div>
+        <%i=i+1%>
+        <%end%>
+
+      </div>
+      <a id="mostrarestadistica" class="btn btn-primary">Mas informaci&oacuten</a> 
+      <div id="piechart_3d" style="width: 1150px; height: 700px;" ></div>
+      <!--
+      <button class="btn btn-default btn-lg">Ver más</button>
+    -->
+ 
+</div>
+</div>
+
+<div class="container-fluid bg-grey">
+  <div class="row">
+    
+    <div class="col-sm-8">
+      <h2>Cont&aacutectanos</h2>
+      <h4>Ponte en contacto con nosotros para resolverte cualquier duda o informaci&oacuten sobre AlCompas</h4>      
+      <p>Tu opini&oacuten es importante para nosotros, con ella podemos mejorar para t&iacute</p>
+      <%= link_to "Enviar mensaje", welcome_contactenos_path , class: "btn btn-default btn-lg"%>
+    </div>
+    <div class="col-sm-4">
+      <span class="glyphicon glyphicon-user logo"></span>
+    </div>
+  </div>
+</div>

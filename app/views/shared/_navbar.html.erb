@@ -1,0 +1,96 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header" style="width: 10%;">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span> <img alt="Icon" src="/assets/logo2.png" style="width: 35px;" /></span>AlCompas<span class="caret"></span></a>  
+
+          <ul class="dropdown-menu">
+            <li> <%= link_to "Inicio", root_path %> </li>
+            <li> <%= link_to "Acerca de", welcome_acercade_path %> </li>
+            <li> <%= link_to "Contáctanos ", welcome_contactenos_path %> </li>
+            
+            <li role="separator" class="divider"></li>
+
+            <li>
+                <%= form_tag songs_resultados_path, method: :get, class:"navbar-form navbar-left" do %>
+                  <div class="form-group">
+                    <%= text_field_tag :buscar_cancion,params[:buscar_cancion],class:'form-control',placeholder:"Buscar cancion...", autocomplete: "on", size:10 %>
+                  </div>
+                    <%= button_tag( class:"btn btn-default") do %>
+                      <span class='glyphicon glyphicon-search'></span>
+                    <% end %> 
+                <%end%>
+               
+            </li>
+            <p><%=  %></p>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Canciones m&aacutes populares</a></li>
+            <% if user_signed_in? %>
+              
+              <% if current_user.role == "admin" %>
+                <li> <%= link_to "Gestión de usuarios", users_path %> </li>
+              <%else%>
+                <li><%= link_to "Mis canciones", songs_path %></li>
+              <%end%>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+            <li role="separator" class="divider"></li>
+              <li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+            <li><%= link_to "Registrarse", new_user_registration_path %></li>
+            <%end%>
+            
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" style="width: 90%;">
+
+      <ul class="nav navbar-nav">
+        <li > <%= link_to "Inicio", root_path %><span class="sr-only">(current)</span> </li>
+        <%if user_signed_in? %>
+          <% if current_user.role == "admin" %>
+          <li> <%= link_to "Gestión de usuarios", users_path %> </li>
+          <%else%>
+                <li><%= link_to "Mis canciones", songs_path %></li>
+          <%end%>
+        <%end%>
+        <li> <%= link_to "Acerca de", welcome_acercade_path %> </li>
+        
+      </ul>
+
+      <%if request.fullpath != "/" %>
+          <%= form_tag songs_resultados_path, method: :get, class:"navbar-form navbar-left" do %>
+        
+          <div class="form-group">
+            <!--<select id="txtOpcion" name="txtOpcion" class="form-control input-md">
+                  <option value ="Titulo" >T&iacutetulo</option>
+                  <option value ="Autor">Autor</option>
+                </select>-->
+                <%= select_tag 'criterio', "<option value='titulo'>Titulo</option><option value='autor'>Autor</option>".html_safe, class: "form-control"%>  
+          </div>
+              <%= text_field_tag :buscar_cancion,params[:buscar_cancion],class:'form-control',placeholder:"Buscar cancion...", autocomplete: "on", size:20 %>
+              
+              <%= button_tag( class:"btn btn-default") do %>
+                <span class='glyphicon glyphicon-search'></span>
+              <% end %> 
+      <%end%>
+<%end%>
+     
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+        <li class="social pull-right"><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+        <li> <%= image_tag(current_user.imagenPerfil, size:"40", style:"padding-top: 10px;") %> </li>
+        <li class="social pull-right"><%= link_to  Sanitize.fragment(current_user.apodo, Sanitize::Config::RELAXED).html_safe , edit_user_registration_path %></li>
+
+        <% else %>
+        <li class="social pull-right"><%= link_to "Iniciar sesión", new_user_session_path %></li>
+        <li class="social pull-right"><%= link_to "Registrarse", new_user_registration_path %></li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>

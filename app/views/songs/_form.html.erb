@@ -1,0 +1,135 @@
+<div class="row content">
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+    <div class="col-sm-8 text-left"> 
+    <h2 class="text-center">Informaci&oacuten b&aacutesica</h2>
+        <%= form_for(@song) do |f| %>
+          <% if @song.errors.any? %>
+            <div id="error_explanation">
+             <!-- <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>-->
+              <ul>
+              <% @song.errors.full_messages.each do |message| %>
+               <!-- <li><%= message %></li>-->
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <!--<div id="tabs">
+              <ul class="nav nav-tabs">
+                <li><a href="#informacionbasica">Informaci&oacuten b&aacutesica</a></li>
+                <li><a href="#letrayacordes">Letra y acordes</a></li>
+                <li><a href="#videoyaudio">Video y audio</a></li>
+              </ul>
+              <br>-->
+              <!--Sección de información básica-->
+
+              <div class="form-horizontal" id="informacionbasica">
+                <div class="form-group">
+                  <%= f.label :titulo, "Título *", class:"control-label col-sm-3"%>
+                  <div class="col-sm-6">
+                  <%= f.text_field :titulo, autofocus: true, placeholder:"Ej: cuando pase el temblor", class:"form-control", :onblur =>"validarTitulo(this);",:onkeyup =>"validarTitulo(this);" %>
+                  <span class="help-inline" id="error_titulo" style="color:#FF0000"><%= @song.errors[:titulo].any? ? @song.errors[:titulo].to_s[/\w([^"]*)/] : "" %></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label :autor, "Autor *", class:"control-label col-sm-3"%>
+                  <div class="col-sm-6">
+                  <%= f.text_field :autor, autofocus: true, placeholder:"Ej: Gustavo Cerati", class:"form-control", :onblur =>"validarAutor(this);",:onkeyup =>"validarAutor(this);" %>
+                   <span class="help-inline" id="error_autor" style="color:#FF0000"><%= @song.errors[:autor].any? ? @song.errors[:autor].to_s[/\w([^"]*)/] : "" %></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label :anio_creacion, "Año *", class:"control-label col-sm-3"%>
+                  <div class="col-sm-6">
+                  <%= f.text_field :anio_creacion, autofocus: true, placeholder:"Ej: 1985", class:"form-control", :onblur =>"validarAño(this);",:onkeyup =>"validarAño(this);"  %>
+                  <span class="help-inline" id="error_año" style="color:#FF0000"><%= @song.errors[:anio_creacion].any? ? @song.errors[:anio_creacion].to_s[/\w([^"]*)/] : "" %></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label :album, "Álbum ", class:"control-label col-sm-3"%>
+                  <div class="col-sm-6">
+                  <%= f.text_field :album, autofocus: true, placeholder:"Ej: Nada personal", class:"form-control", :onblur =>"validarAlbum(this);",:onkeyup =>"validarAlbum(this);" %>
+                    <span class="help-inline" id="error_album" style="color:#FF0000"><%= @song.errors[:album].any? ? @song.errors[:album].to_s[/\w([^"]*)/] : "" %></span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <%= f.label :genre_id, "Género *", class:"control-label col-sm-3"%>
+                  <div class="col-sm-6">
+                    <%= f.collection_select(:genre_id, Genre.all, :id, :nombre , class:"form-control") %>
+                  </div>
+                  
+                </div>
+                <a href="#letra" id="abrirletrayacordes" class="btn btn-primary">Siguiente</a>
+              </div>
+              
+            <!--Sección de letras y acordes-->
+            <div id="letrayacordes">
+            <h2 class="text-center">Letra y acordes</h2>
+              <div class="form-horizontal">
+                  <div class="form-group">
+                      <%= f.label :tuning_id, "Afinación ", class:"control-label col-sm-3"%>
+                      <div class="col-sm-6">
+                        <select name="song[tuning_id]" id="opcion">
+                          <% Tuning.all.each do |t| %>
+                            <option value="<%=t.id%>">
+                              <%= t.nombre_afinacion %>
+                            </option>
+                          <%end%>
+                        </select>
+                      </div>
+                  </div> 
+              </div>
+              <div class="panel panel-primary">
+                <div class="panel-heading">Acordes</div>
+                <div class="panel-body">
+                    <p>Aqu&iacute van los acordes</p>
+                </div>
+              </div>
+              <div class="panel panel-primary">
+                <div class="panel-heading" id="letra">Letra</div>
+                <div class="panel-body">
+                    <%= f.text_area :letra, class:"form-control",:onblur =>"validarLetra(this);",:onkeyup =>"validarLetra(this);"%>
+                    <span class="help-inline" id="error_letra" style="color:#FF0000"><%= @song.errors[:letra].any? ? @song.errors[:letra].to_s[/\w([^"]*)/] : "" %></span>
+                </div>
+              </div>
+              <a href="#video" id="abrirvideoyaudio" class="btn btn-primary">Siguiente</a>
+            </div>
+            <!--Sección de video y audio-->
+            <div id="videoyaudio">
+            <h2 class="text-center">Video y audio</h2>
+              <div class="row content">
+                <!--Video-->
+                <div class="col-sm-6 text-left">
+                  <p><span class="glyphicon glyphicon-facetime-video"></span></p>
+                  <p>Direcci&oacuten web del video</p>
+                  <img src="/assets/enlaceYoutube.PNG" class="img-responsive">
+                  <%= f.label :url_video, "https://www.youtube.com/watch?v="%>
+                  <!--<div class="col-sm-6">-->                  
+                  <%= f.text_field :url_video, autofocus: true, placeholder:"Ej: fJ9rUzIMcZQ",:onblur =>"validarUrl(this);",:onkeyup =>"validarUrl(this);" %>
+                  <span class="help-inline" id="error_url" style="color:#FF0000"><%= @song.errors[:url_video].any? ? @song.errors[:url_video].to_s[/\w([^"]*)/] : "" %></span>
+                  <!--</div>--><br><br>
+                  <div id="video" class="embed-responsive embed-responsive-4by3"> 
+                      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/<%= @song.url_video%>" frameborder="0" allowfullscreen></iframe>
+                  </div>
+                </div>
+                <!--Audio-->
+                <div class="col-sm-6 text-left"> 
+                  <p><span class="glyphicon glyphicon-volume-up"></span></p>
+                  <p>Selecciona el audio de la canci&oacuten</p>
+                </div>
+              </div>
+              <br>
+          <div class="form-actions">
+            <%= f.submit "Aceptar" ,class: "btn btn-primary"%>
+          </div>
+            </div>
+
+          <!--</div>-->
+          
+        <% end %>
+    </div>
+    <div class="col-sm-2 sidenav">
+      
+    </div>
+</div>

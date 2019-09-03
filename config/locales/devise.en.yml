@@ -1,0 +1,95 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  devise:
+    confirmations:
+      #confirmed: "Your email address has been successfully confirmed."
+      confirmed: "Su dirección de correo ha sido confirmada satisfactoriamente."
+      #send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
+      send_instructions: "Usted recibirá un correo electrónico con instrucciones sobre cómo confirmar su dirección de correo electrónico en unos pocos minutos."
+      #send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
+      send_paranoid_instructions: "Si existe su dirección de correo electrónico en nuestra base de datos, recibirá un correo electrónico con instrucciones sobre cómo confirmar su dirección de correo electrónico en unos pocos minutos."
+    failure:
+      #already_authenticated: "You are already signed in."
+      already_authenticated: "Ya has iniciado sesión."
+      #inactive: "Your account is not activated yet."
+      inactive: "Tu cuenta aún no está activada."
+
+      invalid: "Rectifica tu correo electrónico o tu contraseña."
+
+      #locked: "Your account is locked."
+      locked: "Tu cuenta está bloqueada."
+      #last_attempt: "You have one more attempt before your account is locked."
+      last_attempt: "Tiene un intento más antes de que su cuenta está bloqueada."
+
+      not_found_in_database: "Rectifica tu correo electrónico o tu contraseña."
+
+      #timeout: "Your session expired. Please sign in again to continue."
+      timeout: "Su sesión ha finalizado. Por favor inicia sesión de nuevo para continuar."
+      #unauthenticated: "You need to sign in or sign up before continuing."
+      unauthenticated: "Es necesario iniciar sesión o registrarse antes de continuar."
+      #unconfirmed: "You have to confirm your email address before continuing."
+      unconfirmed: "Usted tiene que confirmar su dirección de correo electrónico antes de continuar."
+    mailer:
+      confirmation_instructions:
+        #subject: "Confirmation instructions"
+        subject: "Instrucciones de confirmación."
+      reset_password_instructions:
+        #subject: "Reset password instructions"
+        subject: "Instrucciones de restablecimiento de contraseña."
+      unlock_instructions:
+        #subject: "Unlock instructions"
+        subject: "Instrucciones de desbloqueo"
+      password_change:
+        #subject: "Password Changed"
+        subject: "Contraseña modificada."
+    omniauth_callbacks:
+      failure: "No se puede autenticar desde %{kind} porque \"%{reason}\"."
+      success: "Autenticación satisfactoria desde cuenta %{kind}."
+    passwords:
+      no_token: "No se puede acceder a esta página sin que venga de un mensaje de restablecimiento de contraseña. Si viene de un mensaje de restablecimiento de contraseña, por favor asegúrese de que utilizó la URL completa proporcionada."
+      send_instructions: "Usted recibirá un correo electrónico con instrucciones sobre cómo restablecer su contraseña en unos pocos minutos."
+      send_paranoid_instructions: "Si existe su dirección de correo electrónico en nuestra base de datos, usted recibirá un enlace de recuperación de la contraseña a su dirección de correo electrónico en unos pocos minutos."
+      updated: "Tu contraseña ha sido cambiada exitosamente. Ahora ya iniciaste sesión"
+      updated_not_active: "Tu contraseña ha sido cambiada exitosamente."
+
+    registrations:
+      #destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
+      destroyed: "¡Adiós! Su cuenta se ha cancelado correctamente. Esperamos volver a verte pronto."
+      #signed_up: "Welcome! You have signed up successfully."
+      signed_up: "¡Bienvenido! Te has registrado con éxito."
+
+      signed_up_but_inactive: "Usted se ha registrado con éxito. Sin embargo, no se podía iniciar sesión porque la cuenta aún no está activada."
+      signed_up_but_locked: "Usted se ha registrado con éxito. Sin embargo, no se ha podido iniciar sesión debido a que su cuenta está bloqueada."
+
+      #signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      signed_up_but_unconfirmed: "Un mensaje con un enlace de confirmación ha sido enviado a su dirección de correo electrónico. Por favor, siga el enlace para activar su cuenta."
+      #update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and follow the confirm link to confirm your new email address."
+      update_needs_confirmation: "Ha actualizado su cuenta con éxito, pero necesita verificar su nueva dirección de correo electrónico. Por favor, consultar su correo electrónico y siga el enlace de confirmación para confirmar su nueva dirección de correo electrónico."
+      #updated: "Your account has been updated successfully."
+      updated: "Tu cuenta ha sido actualizada con éxito."
+    sessions:
+      #signed_in: "Signed in successfully."
+      signed_in: "Inicio de sesión con éxito."
+      #signed_out: "Signed out successfully."
+      signed_out: "Se ha cerrado la sesión con éxito."
+      #already_signed_out: "Signed out successfully."
+    unlocks:
+      send_instructions: "Usted recibirá un correo electrónico con instrucciones para desbloquear su cuenta en pocos minutos."
+      send_paranoid_instructions: "Si existe la cuenta, recibirá un correo electrónico con instrucciones sobre cómo desbloquearlo en pocos minutos."
+      unlocked: "Tu contraseña ha sido desbloqueada satisfactoriamente, inicia sesión para continuar"
+
+  errors:
+    messages:
+      #already_confirmed: "was already confirmed, please try signing in"
+      already_confirmed: "Ya se confirmó, intenta acceder de nuevo"
+      confirmation_period_expired: "Debe ser confirmado dentro de %{period}, por favor solicite uno nuevo"
+      expired: "Ha caducado, por favor solicita uno nuevo"
+      #not_found: "not found"
+      not_found: "no encontrado"
+      not_locked: "No estaba cerrado"
+      not_saved:
+        #one: "1 error prohibited this %{resource} from being saved:"
+        one: "El usuario no puede ser guardado debido a un error:"
+        other: "El usuario no puede ser guardado debido a %{count} errores:"
+

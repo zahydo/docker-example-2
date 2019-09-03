@@ -1,0 +1,38 @@
+<p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+<h1 class="text-center">Iniciar sesi&oacuten</h1>
+<p class="text-center">*Obligatorio</p>
+  <div class="form-horizontal" role="form">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="form-group">
+    <%= f.label :email , "Correo electrónico* ", class:"control-label col-sm-3"%>
+    <div class="col-sm-6">
+        <%= f.email_field :email, autofocus: false, class:"form-control", placeholder: "Digita tu correo electrónico",:onblur =>"validarEmailCorrecto(this);",:onkeyup =>"validarEmailCorrecto(this);" %>
+        <span class="help-inline" id="error_email" style="color:#FF0000"><%= @user.errors[:email].any? ? @user.errors[:email].to_s[/\w([^"]*)/] : "" %></span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password, "Contraseña* ",class:"control-label col-sm-3" %>
+    <div class="col-sm-6">
+        <%= f.password_field :password, autofocus: false, class:"form-control", placeholder: "Digita tu contraseña",:onblur => "validarContrasenaCorrecto(this);",:onkeyup => "validarContrasenaCorrecto(this);" %>
+        <span class="help-inline" id="error_contrasena" style="color:#FF0000"><%= @user.errors[:password].any? ? @user.errors[:password].to_s[/\w([^"]*)/] : "" %></span>
+    </div>
+  </div>
+
+  <% if devise_mapping.rememberable? -%>
+    <div class="form-group">
+    <div class="col-sm-9" style="float:right;">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, "Recordarme" %>
+      </div>
+    </div>
+  <% end -%>
+
+  <div class="form-actions">
+    <%= f.submit "Iniciar sesión", class:"btn btn-default" %>
+  </div>
+<% end %>
+</div>
+
+<%= render "devise/shared/links" %>
