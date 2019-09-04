@@ -67,6 +67,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (2.7.5)
+    dotenv-rails (2.7.5)
+      dotenv (= 2.7.5)
+      railties (>= 3.2, < 6.1)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.11.1)
@@ -99,6 +103,7 @@ GEM
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
+    nio4r (2.3.1)
     nokogiri (1.9.1)
       mini_portile2 (~> 2.4.0)
     nokogumbo (2.0.1)
@@ -110,7 +115,9 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    pg (0.21.0)
+    pg (0.20.0)
+    puma (4.1.0)
+      nio4r (~> 2.0)
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (1.6.11)
@@ -212,13 +219,15 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  dotenv-rails
   googlecharts
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
   paperclip
-  pg (~> 0.15)
+  pg (~> 0.20.0)
+  puma
   pundit
   rails (= 4.2.6)
   ratyrate

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.2.6'
 
 gem 'rails', '4.2.6'
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.20.0'
 gem 'sqlite3' , '~> 1.3.6'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -18,7 +18,8 @@ gem 'jquery-ui-rails'
 gem 'will_paginate-bootstrap'
 gem 'googlecharts'
 gem 'ratyrate'
-
+gem 'puma'
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 require 'rbconfig'
 gem 'wdm', '>= 0.1.0' if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
