@@ -82,7 +82,7 @@ production:
   <<: *default
   database: music_repository_production
   adapter: postgresql
-  host: <%= ENV.fetch('DATABASE_HOST') {"localhost"}%>
+  host: db
   port: 5432
-  username: <%= ENV.fetch('DATABASE_USERNAME') {"developer"}%>
-  password: <%= ENV.fetch('DATABASE_PASSWORD') {"developer_pass"}%>
+  username: <%= ENV['DATABASE_USERNAME']%>
+  password: <%= ENV['DATABASE_PASSWORD']%>

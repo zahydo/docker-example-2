@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    build: .
+    volumes:
+      - web-data:/app
+      - gem-home-data:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      - DATABASE_USERNAME=developer
+      - DATABASE_PASSWORD=developer_pass
+      - RAILS_ENV=production
+      - SECRET_KEY_BASE=e068f5ecf5504b39cdade0069c02a514794e6c2b9878e74aa8aebce1b839e7201376f168a265eef14d058ccffe1ac0dc8ebf46def69888e5246225e397b71023
+    # env_file:
+    #   - config.env
+  db:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=developer
+      - POSTGRES_PASSWORD=developer_pass
+volumes:
+  web-data:
+  db-data:
+  gem-home-data:
